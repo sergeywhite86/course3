@@ -1,20 +1,14 @@
 package ru.hogwarts.school.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import ru.hogwarts.school.model.Faculty;
 
 import java.util.List;
 
+
 @Repository
-public interface FacultyRepository<Faculty> {
+public interface FacultyRepository extends JpaRepository<Faculty, Long> {
 
-   List<Faculty> findAll();
-
-    Faculty findById(Long id);
-
-    Faculty save(String name,String color);
-
-    Faculty deleteById(Long id);
-
-    List<Faculty> filterByColor(String color);
+    List<Faculty> findFacultiesByColor(String color);
 }

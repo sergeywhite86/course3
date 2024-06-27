@@ -1,19 +1,13 @@
 package ru.hogwarts.school.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import ru.hogwarts.school.model.Student;
 
 import java.util.List;
 
 @Repository
-public interface StudentRepository<Student> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    List<Student> findAll();
-
-    Student findById(Long id);
-
-    Student save(String name, Integer age);
-
-    Student deleteById(Long id);
-
-    List<Student> filterByAge(int age);
+    List <Student> findStudentsByAge(int age);
 }

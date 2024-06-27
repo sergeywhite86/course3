@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
-import ru.hogwarts.school.repository.impl.StudentRepositoryImpl;
 
 
 import java.util.List;
@@ -13,27 +12,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
 
-    StudentRepository<Student> studentRepository = new StudentRepositoryImpl();
-
+    private final StudentRepository studentRepository;
 
     public List<Student> getAll() {
         return studentRepository.findAll();
     }
 
     public Student getById(Long id) {
-        return studentRepository.findById(id);
+        return studentRepository.findById(id).orElse(null);
     }
 
     public Student save(String name, Integer age) {
-        return studentRepository.save(name, age);
+        Student student = new Student();
+        student.setName(name);
+        student.setAge(age);
+        return studentRepository.save(student);
     }
 
-    public Student deleteById(Long id) {
-        return studentRepository.deleteById(id);
+    public void deleteById(Long id) {
+        studentRepository.deleteById(id);
     }
 
     public List<Student> filterByAge(int age) {
-        return studentRepository.filterByAge(age);
+        return studentRepository.findStudentsByAge(age);
     }
 
 }

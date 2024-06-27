@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -30,8 +31,8 @@ public class FacultyController {
     }
 
     @DeleteMapping("/{id}")
-    public Faculty deleteFacultyById(@PathVariable Long id) {
-        return facultyService.deleteById(id);
+    public void deleteFacultyById(@PathVariable Long id) {
+         facultyService.deleteById(id);
     }
 
     @GetMapping("/filter")
