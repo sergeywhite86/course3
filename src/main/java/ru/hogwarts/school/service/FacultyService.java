@@ -33,7 +33,12 @@ public class FacultyService {
     }
 
     public List<Faculty> filterFacultyByColor(String color) {
-        return facultyRepository.findFacultiesByColor(color);
+        return facultyRepository.findFacultiesByColorIgnoreCase(color);
     }
+
+    public List<Faculty> filterFacultyByName(String name) {
+        return facultyRepository.findFacultiesByNameIgnoreCase(name);
+    }
+
 
 }

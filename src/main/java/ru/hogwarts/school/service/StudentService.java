@@ -33,8 +33,12 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public List<Student> filterByAge(int age) {
+    public List<Student> getStudentByAge(int age) {
         return studentRepository.findStudentsByAge(age);
+    }
+
+    public List<Student> getStudentsBetweenAge(int minAge, int maxAge) {
+        return studentRepository.findStudentsByAgeBetween(minAge, maxAge);
     }
 
 }

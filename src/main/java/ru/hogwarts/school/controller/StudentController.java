@@ -2,9 +2,11 @@ package ru.hogwarts.school.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,6 +15,7 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+
 
     @GetMapping
     public List<Student> getAllStudents() {
@@ -30,13 +33,26 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFacultyById(@PathVariable Long id) {
-         studentService.deleteById(id);
+    public void deleteStudentById(@PathVariable Long id) {
+        studentService.deleteById(id);
     }
 
-    @GetMapping("/filter/{age}")
-    public List<Student> getStudentsByAge(@PathVariable Integer age) {
-        return studentService.filterByAge(age);
+    @GetMapping("/filter")
+    public List<Student> getStudentsByAge(@RequestParam(required = false) Integer age,
+                                          @RequestParam(required = false) Integer min,
+                                          @RequestParam(required = false) Integer max) {
+        if (age != null) {
+            return studentService.getStudentByAge(age);
+        }
+        if (min != null && max != null) {
+           return studentService.getStudentsBetweenAge(min, max);
+        }
+        return new ArrayList<>();
+    }
+
+    @GetMapping("/faculty/{id}")
+    public Faculty getStudentFaculty(@PathVariable Long id) {
+        return studentService.getById(id).getFaculty();
     }
 
 }
