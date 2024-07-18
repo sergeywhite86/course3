@@ -16,6 +16,10 @@ public class Student {
     private String name;
     private int age;
 
+    @OneToOne(mappedBy = "student")
+    @JoinColumn()
+    private Avatar avatar;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "faculty_id")
