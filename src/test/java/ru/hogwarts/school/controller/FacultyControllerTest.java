@@ -62,7 +62,6 @@ class FacultyControllerTest {
 
     }
 
-
     @Test
     void shouldGetAllFacultyIsOk() throws Exception {
         when(facultyRepository.findAll()).thenReturn(new ArrayList<>());

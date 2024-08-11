@@ -10,7 +10,6 @@ import ru.hogwarts.school.model.Student;
 
 import java.util.List;
 
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class StudentControllerTest {
 
