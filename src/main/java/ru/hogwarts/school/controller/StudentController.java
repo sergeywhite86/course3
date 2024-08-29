@@ -22,9 +22,14 @@ public class StudentController {
         return studentService.getAll();
     }
 
-    @PostMapping("/add")
-    public Student createStudent(@RequestParam String name, @RequestParam Integer age) {
-        return studentService.save(name, age);
+    @GetMapping("/count")
+    public Integer getAllStudentsCount() {
+        return studentService.getCountStudents();
+    }
+
+    @GetMapping("/avgAge")
+    public Double getAverageAge() {
+        return studentService.getAverageAgeByStudents();
     }
 
     @GetMapping("/{id}")
@@ -32,9 +37,9 @@ public class StudentController {
         return studentService.getById(id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteStudentById(@PathVariable Long id) {
-        studentService.deleteById(id);
+    @GetMapping("/topFive")
+    public List<Student> getTop5Students() {
+        return studentService.getTop5();
     }
 
     @GetMapping("/filter")
@@ -45,7 +50,7 @@ public class StudentController {
             return studentService.getStudentByAge(age);
         }
         if (min != null && max != null) {
-           return studentService.getStudentsBetweenAge(min, max);
+            return studentService.getStudentsBetweenAge(min, max);
         }
         return new ArrayList<>();
     }
@@ -54,5 +59,17 @@ public class StudentController {
     public Faculty getStudentFaculty(@PathVariable Long id) {
         return studentService.getById(id).getFaculty();
     }
+
+    @PostMapping("/add")
+    public Student createStudent(@RequestParam String name, @RequestParam Integer age) {
+        return studentService.save(name, age);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudentById(@PathVariable Long id) {
+        studentService.deleteById(id);
+    }
+
+
 
 }
