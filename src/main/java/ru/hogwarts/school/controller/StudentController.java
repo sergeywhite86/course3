@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentService<Student> studentService;
 
 
     @GetMapping

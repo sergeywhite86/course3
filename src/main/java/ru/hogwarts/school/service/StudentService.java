@@ -1,57 +1,26 @@
 package ru.hogwarts.school.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.repository.StudentRepository;
-
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class StudentService {
+public interface StudentService<Student> {
 
-    private final StudentRepository studentRepository;
+    List<Student> getAll();
 
+    Student getById(Long id);
 
-    public List<Student> getAll() {
-        return studentRepository.findAll();
-    }
+    Student save(String name, Integer age);
 
-    public Student getById(Long id) {
-        return studentRepository.findById(id).orElse(null);
-    }
+    void deleteById(Long id);
 
-    public Student save(String name, Integer age) {
-        Student student = new Student();
-        student.setName(name);
-        student.setAge(age);
-        return studentRepository.save(student);
-    }
+    List<Student> getStudentByAge(int age);
 
-    public void deleteById(Long id) {
-        studentRepository.deleteById(id);
-    }
+    List<Student> getStudentsBetweenAge(int minAge, int maxAge);
 
-    public List<Student> getStudentByAge(int age) {
-        return studentRepository.findStudentsByAge(age);
-    }
+    Integer getCountStudents();
 
-    public List<Student> getStudentsBetweenAge(int minAge, int maxAge) {
-        return studentRepository.findStudentsByAgeBetween(minAge, maxAge);
-    }
+    Double getAverageAgeByStudents();
 
-    public Integer getCountStudents() {
-        return studentRepository.findCountStudents();
-    }
-
-    public Double getAverageAgeByStudents() {
-        return studentRepository.findAverageAgeByStudents();
-    }
-
-    public List<Student> getTop5() {
-        return studentRepository.findTop5();
-    }
+    List<Student> getTop5();
 
 }

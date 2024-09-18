@@ -1,44 +1,19 @@
 package ru.hogwarts.school.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class FacultyService {
+public interface FacultyService<Faculty> {
 
-    private final FacultyRepository facultyRepository;
+    List<Faculty> getAll();
 
-    public List<Faculty> getAll() {
-        return facultyRepository.findAll();
-    }
+    Faculty getById(Long id);
 
-    public Faculty getById(Long id) {
-        return facultyRepository.findById(id).orElse(null);
-    }
+    Faculty save(String name, String color);
 
-    public Faculty save(String name, String color) {
-        Faculty faculty = new Faculty();
-        faculty.setName(name);
-        faculty.setColor(color);
-        return facultyRepository.save(faculty);
-    }
+    void deleteById(Long id);
 
-    public void deleteById(Long id) {
-        facultyRepository.deleteById(id);
-    }
+    List<Faculty> filterFacultyByColor(String color);
 
-    public List<Faculty> filterFacultyByColor(String color) {
-        return facultyRepository.findFacultiesByColorIgnoreCase(color);
-    }
-
-    public List<Faculty> filterFacultyByName(String name) {
-        return facultyRepository.findFacultiesByNameIgnoreCase(name);
-    }
-
-
+    List<Faculty> filterFacultyByName(String name);
 }

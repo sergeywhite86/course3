@@ -16,7 +16,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class FacultyController {
 
-    private final FacultyService facultyService;
+    private final FacultyService<Faculty> facultyService;
 
     @GetMapping
     public List<Faculty> getAllFaculty() {
