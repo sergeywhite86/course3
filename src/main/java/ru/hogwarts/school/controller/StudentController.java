@@ -70,6 +70,14 @@ public class StudentController {
         studentService.deleteById(id);
     }
 
+    @GetMapping("/start_A")
+    public List<String> getStudentsStartA() {
+        return studentService.getStudentsStartWitnA();
+    }
 
+    @GetMapping("/averageAge")
+    public Double getStudentsAverageAge() {
+        return studentService.getAverageAgeByStudents();
+    }
 
 }

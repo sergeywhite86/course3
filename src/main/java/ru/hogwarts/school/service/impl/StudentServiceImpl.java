@@ -9,6 +9,7 @@ import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
 
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -74,6 +75,25 @@ public class StudentServiceImpl implements StudentService<Student> {
     public List<Student> getTop5() {
         log.info("Get top 5 students");
         return studentRepository.findTop5();
+    }
+
+    @Override
+    public List<String> getStudentsStartWitnA(){
+        log.info("Get student start with A");
+        return studentRepository.findAll().stream()
+                .filter(s->s.getName().startsWith("A"))
+                .sorted(Comparator.comparing(Student::getName))
+                .map(student -> student.getName().toUpperCase())
+                .toList();
+    }
+
+    @Override
+    public Double gerAverageAge() {
+        log.info("Get student average age");
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0);
     }
 
 }
