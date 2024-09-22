@@ -9,6 +9,7 @@ import ru.hogwarts.school.service.StudentService;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/students")
 @RequiredArgsConstructor
@@ -80,4 +81,34 @@ public class StudentController {
         return studentService.getAverageAgeByStudents();
     }
 
+    @GetMapping("hw6Task1")
+    public void hwFive6Task1() {
+        List<Student> students = studentService.getAll();
+        new Thread(() -> {
+            for (int i = 0; i < students.size(); i += 2) {
+                System.out.println(students.get(i));
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 1; i < students.size(); i += 2) {
+                System.out.println(students.get(i));
+            }
+        }).start();
+
+    }
+
+    @GetMapping("hw6Task2")
+    public void hwFive6Task2() {
+
+        new Thread(this::printStudents).start();
+        new Thread(this::printStudents).start();
+
+    }
+
+    private synchronized void printStudents() {
+        List<Student> students = studentService.getAll();
+        students.forEach(System.out::println);
+    }
 }
+
