@@ -84,31 +84,42 @@ public class StudentController {
     @GetMapping("hw6Task1")
     public void hwFive6Task1() {
         List<Student> students = studentService.getAll();
-        new Thread(() -> {
-            for (int i = 0; i < students.size(); i += 2) {
-                System.out.println(students.get(i));
-            }
-        }).start();
+
+        System.out.println(students.get(0).getName());
+        System.out.println(students.get(1).getName());
 
         new Thread(() -> {
-            for (int i = 1; i < students.size(); i += 2) {
-                System.out.println(students.get(i));
-            }
+            System.out.println(students.get(2).getName());
+            System.out.println(students.get(3).getName());
         }).start();
 
+
+        new Thread(() -> {
+            System.out.println(students.get(4).getName());
+            System.out.println(students.get(5).getName());
+        }).start();
     }
 
     @GetMapping("hw6Task2")
     public void hwFive6Task2() {
+        List<Student> students = studentService.getAll();
 
-        new Thread(this::printStudents).start();
-        new Thread(this::printStudents).start();
+        System.out.println(students.get(0).getName());
+        System.out.println(students.get(1).getName());
 
+        new Thread(() -> {
+            printName(students.get(2).getName());
+            printName(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            printName(students.get(4).getName());
+            printName(students.get(5).getName());
+        }).start();
     }
 
-    private synchronized void printStudents() {
-        List<Student> students = studentService.getAll();
-        students.forEach(System.out::println);
+    public synchronized void printName(String name) {
+        System.out.println(name);
     }
 }
 
