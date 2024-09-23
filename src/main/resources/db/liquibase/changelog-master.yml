@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: db/liquibase/scripts/add_indexes.sql
